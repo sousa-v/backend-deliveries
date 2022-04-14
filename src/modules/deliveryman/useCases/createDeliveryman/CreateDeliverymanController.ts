@@ -3,16 +3,16 @@ import { Request, Response } from "express";
 import { CreateDeliverymanUseCase } from "./CreateDeliverymanUseCase";
 
 export class CreateDeliverymanController {
-  async handle(request:Request, response:Response):Promise<Response> {
-    const { username, password } = request.body
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { username, password } = request.body;
 
-    const createDeliverymanUseCase = new CreateDeliverymanUseCase()
+    const createDeliverymanUseCase = new CreateDeliverymanUseCase();
 
     const delivery = await createDeliverymanUseCase.execute({
       username,
-      password
-    })
+      password,
+    });
 
-    return response.json(delivery)
+    return response.json(delivery);
   }
 }

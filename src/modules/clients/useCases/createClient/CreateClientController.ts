@@ -2,13 +2,13 @@ import { Request, Response } from "express";
 import { CreateClientUseCase } from "./CreateClientUseCase";
 
 export class CreateClientController {
-  async handle(request:Request, response:Response):Promise<Response> {
-    const { username, password } = request.body
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { username, password } = request.body;
 
-    const createClientUseCase = new CreateClientUseCase()
+    const createClientUseCase = new CreateClientUseCase();
 
-    const client = await createClientUseCase.execute({ username, password})
+    const client = await createClientUseCase.execute({ username, password });
 
-    return response.json(client)
+    return response.json(client);
   }
 }

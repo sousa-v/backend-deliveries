@@ -2,25 +2,29 @@ import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
 interface IPayload {
-  sub :string
+  sub: string;
 }
 
-export async function ensureAuthenticateClient(request:Request, response: Response, next:NextFunction){
-  const authHeader = request.headers.authorization
+export async function ensureAuthenticateClient(
+  request: Request,
+  response: Response,
+  next: NextFunction
+) {
+  const authHeader = request.headers.authorization;
 
-  if(!authHeader) {
-    return response.status(401).json({ message: "Token missing!"})
+  if (!authHeader) {
+    return response.status(401).json({ message: "Token missing!" });
   }
 
-  const [, token ] = authHeader.split(" ")
+  const [, token] = authHeader.split(" ");
 
   try {
-    const { sub } = verify(token, "nodejsprisma") as IPayload
+    const { sub } = verify(token, "nodejsprisma") as IPayload;
 
-    request.id_client = sub
+    request.id_client = sub;
 
-    return next()
+    return next();
   } catch (err) {
-    return response.status(401).json({ message: "Invalid token!"})
+    return response.status(401).json({ message: "Invalid token!" });
   }
 }

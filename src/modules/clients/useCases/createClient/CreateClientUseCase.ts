@@ -1,38 +1,36 @@
-import { Clients } from "@prisma/client"
-import { hash } from "bcryptjs"
+import { Clients } from "@prisma/client";
+import { hash } from "bcryptjs";
 
-import { prisma } from "../../../../database/prismaClient"
-
+import { prisma } from "../../../../database/prismaClient";
 
 interface ICreateClient {
-  username : string
-  password: string
+  username: string;
+  password: string;
 }
 
 export class CreateClientUseCase {
-
-  async execute({username, password}:ICreateClient): Promise<Clients>{
+  async execute({ username, password }: ICreateClient): Promise<Clients> {
     const clientExist = await prisma.clients.findFirst({
-      where:{
-        username:{
-          mode: "insensitive"
-        }
-      }
-    })
+      where: {
+        username: {
+          mode: "insensitive",
+        },
+      },
+    });
 
-    if (clientExist){
-      throw new Error("Client already exists!")
+    if (clientExist) {
+      throw new Error("Client already exists!");
     }
 
-    const hashPassword = await hash(password, 10)
+    const hashPassword = await hash(password, 10);
 
     const client = await prisma.clients.create({
-      data:{
-        username, 
-        password: hashPassword
-      }
-    })
+      data: {
+        username,
+        password: hashPassword,
+      },
+    });
 
-    return client
+    return client;
   }
 }
