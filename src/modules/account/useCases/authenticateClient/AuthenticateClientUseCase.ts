@@ -1,8 +1,7 @@
 import { compare } from "bcryptjs"
 import { sign } from "jsonwebtoken"
 
-
-import { prisma } from "../../../database/prismaClient"
+import { prisma } from "../../../../database/prismaClient"
 
 interface IAuthenticateClient {
   username: string

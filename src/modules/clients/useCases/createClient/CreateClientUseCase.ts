@@ -12,7 +12,7 @@ interface ICreateClient {
 export class CreateClientUseCase {
 
   async execute({username, password}:ICreateClient): Promise<Clients>{
-    const clientExists = await prisma.clients.findFirst({
+    const clientExist = await prisma.clients.findFirst({
       where:{
         username:{
           mode: "insensitive"
@@ -20,7 +20,7 @@ export class CreateClientUseCase {
       }
     })
 
-    if (clientExists){
+    if (clientExist){
       throw new Error("Client already exists!")
     }
 
