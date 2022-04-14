@@ -18,6 +18,8 @@ export class CreateDeliverymanUseCase {
       }
     })
 
+    console.log(deliverymanExist)
+
     if(deliverymanExist) {
       throw new Error("Deliveryman already exists!")
     }
