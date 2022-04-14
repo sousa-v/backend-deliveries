@@ -24,7 +24,7 @@ export class AuthenticateClientUseCase {
       throw new Error("Username or password invalid!");
     }
 
-    const token = sign({ username }, "nodejsprisma", {
+    const token = sign({ username }, "nodejsprismaclient", {
       subject: client.id,
       expiresIn: "1d",
     });

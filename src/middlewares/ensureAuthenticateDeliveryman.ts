@@ -5,7 +5,7 @@ interface IPayload {
   sub: string;
 }
 
-export async function ensureAuthenticateClient(
+export async function ensureAuthenticateDeliveryman(
   request: Request,
   response: Response,
   next: NextFunction
@@ -19,9 +19,9 @@ export async function ensureAuthenticateClient(
   const [, token] = authHeader.split(" ");
 
   try {
-    const { sub } = verify(token, "nodejsprismaclient") as IPayload;
+    const { sub } = verify(token, "nodejsprismadeliveryman") as IPayload;
 
-    request.id_client = sub;
+    request.id_deliveryman = sub;
 
     return next();
   } catch (err) {
